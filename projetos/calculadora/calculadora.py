@@ -34,11 +34,3 @@ def resto(a,b):
     resultado = a%b
     return resultado
 
-
-
-print(soma(20,4))
-print(divisao(4,0))
-print(raiz_quadrada(-4))
-print(porcentagem(20,10))
-print(resto(10,3))
-print(potencia(2,3))
