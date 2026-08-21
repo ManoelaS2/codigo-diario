@@ -1,5 +1,5 @@
 import tkinter as tk
-from calculadora import soma, subtracao, multiplicacao, divisao
+from calculadora import soma, subtracao, multiplicacao, divisao,  raiz_quadrada, potencia, resto, porcentagem
 
 #Criar janela
 janela = tk.Tk()
@@ -7,7 +7,7 @@ janela.title("Calculadora")
 
 #Criar display 
 display = tk.Entry(janela, font=("Arial", 20), justify="right")
-display.grid(row=0, column=0, columnspan=3) 
+display.grid(row=0, column=0, columnspan=4, ipady=15, padx=(10, 10), pady=5, sticky="we")
 #display.pack() - mais simples
 
 def clicar(numero):
@@ -40,6 +40,10 @@ def calcular():
         resultado = multiplicacao(primeiro_numero, segundo_numero)
     elif operacao == "/":
         resultado = divisao(primeiro_numero, segundo_numero)
+    elif operacao == "mod":
+        resultado = resto(primeiro_numero, segundo_numero)
+    elif operacao == "%":
+        resultado = porcentagem(primeiro_numero, segundo_numero)
     
     display.delete(0, tk.END)
     display.insert(tk.END, str(resultado))
@@ -61,6 +65,18 @@ def clicar_maismenos():
     novo_numero = numero_atual*(-1) 
     display.delete(0, tk.END) #Apaga todo o texto
     display.insert(0, novo_numero) #Insere o novo bem rápido
+    
+def calcular_raiz():
+    numero = float(display.get())
+    resultado = raiz_quadrada(numero)
+    display.delete(0, tk.END)
+    display.insert(0, str(resultado))
+
+def calcular_quadrado():
+    numero = float(display.get())
+    resultado = potencia(numero, 2)
+    display.delete(0, tk.END)
+    display.insert(0, str(resultado))
 
 #botão 1
 botao1 = tk.Button(janela, text="1", width=15, height=5, command=lambda: clicar(1))
@@ -80,9 +96,13 @@ botao_divisao = tk.Button(janela, text="÷", width=15, height=5, command=lambda:
 botao_igual = tk.Button(janela, text="=", width=15, height=5, command=calcular)
 botao_c = tk.Button(janela, text="C", width=15, height=5, command=limpar)
 botao_apaga = tk.Button(janela, text="⌫", width=15, height=5, command=apagar)
-botao_ce = tk.Button(janela, text="CE", width=15, height=5, command=apagar)
+botao_ce = tk.Button(janela, text="CE", width=15, height=5, command=limpar)
 botao_virgula = tk.Button(janela, text=".", width=15, height=5, command=clicar_ponto)
 botao_maismenos = tk.Button(janela, text="±", width=15, height=5, command=clicar_maismenos)
+botao_raiz = tk.Button(janela, text="√", width=15, height=5, command=calcular_raiz)
+botao_quadrado = tk.Button(janela, text="x²", width=15, height=5, command=calcular_quadrado)
+botao_mod = tk.Button(janela, text="mod", width=15, height=5, command=lambda: escolher_operacao("mod"))
+botao_porcentagem = tk.Button(janela, text="%", width=15, height=5, command=lambda: escolher_operacao("%"))
 
 botao1.grid(row=5, column=0, padx=5, pady=5)
 botao2.grid(row=5, column=1, padx=5, pady=5)
@@ -109,6 +129,9 @@ botao_apaga.grid(row=1, column=3, padx=5, pady=5)
 botao_ce.grid(row=1, column=1, padx=5, pady=5) #Por enquando esta com a mesma função do C
 botao_virgula.grid(row=6, column=2, padx=5, pady=5)
 botao_maismenos.grid(row=6, column=0, padx=5, pady=5)
-
+botao_raiz.grid(row=2, column=2, padx=5, pady=5)
+botao_quadrado.grid(row=2, column=1, padx=5, pady=5)
+botao_mod.grid(row=2, column=0, padx=5, pady=5)
+botao_porcentagem.grid(row=1, column=0, padx=5, pady=5)
 janela.mainloop()
 
