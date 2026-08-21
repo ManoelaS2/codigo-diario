@@ -44,6 +44,24 @@ def calcular():
     display.delete(0, tk.END)
     display.insert(tk.END, str(resultado))
 
+def limpar():
+    display.delete(0, tk.END)
+
+def apagar():
+    texto_atual = display.get() #pega o texto atual
+    novo_texto = texto_atual[:-1] #remove o ultimo caracter
+    display.delete(0, tk.END) #Apaga todo o texto
+    display.insert(0, novo_texto) #Insere o novo bem rápido
+
+def clicar_ponto():
+    display.insert(tk.END, ".")
+
+def clicar_maismenos():
+    numero_atual = float(display.get()) 
+    novo_numero = numero_atual*(-1) 
+    display.delete(0, tk.END) #Apaga todo o texto
+    display.insert(0, novo_numero) #Insere o novo bem rápido
+
 #botão 1
 botao1 = tk.Button(janela, text="1", width=15, height=5, command=lambda: clicar(1))
 botao2 = tk.Button(janela, text="2", width=15, height=5, command=lambda: clicar(2))
@@ -60,8 +78,11 @@ botao_menos = tk.Button(janela, text="-", width=15, height=5, command=lambda: es
 botao_vezes = tk.Button(janela, text="×", width=15, height=5, command=lambda: escolher_operacao("*"))
 botao_divisao = tk.Button(janela, text="÷", width=15, height=5, command=lambda: escolher_operacao("/"))
 botao_igual = tk.Button(janela, text="=", width=15, height=5, command=calcular)
-
-
+botao_c = tk.Button(janela, text="C", width=15, height=5, command=limpar)
+botao_apaga = tk.Button(janela, text="⌫", width=15, height=5, command=apagar)
+botao_ce = tk.Button(janela, text="CE", width=15, height=5, command=apagar)
+botao_virgula = tk.Button(janela, text=".", width=15, height=5, command=clicar_ponto)
+botao_maismenos = tk.Button(janela, text="±", width=15, height=5, command=clicar_maismenos)
 
 botao1.grid(row=5, column=0, padx=5, pady=5)
 botao2.grid(row=5, column=1, padx=5, pady=5)
@@ -83,6 +104,11 @@ botao_vezes.grid(row=3, column=3, padx=5, pady=5)
 botao_divisao.grid(row=2, column=3, padx=5, pady=5)
 botao_igual.grid(row=6, column=3, padx=5, pady=5)
 
+botao_c.grid(row=1, column=2, padx=5, pady=5)
+botao_apaga.grid(row=1, column=3, padx=5, pady=5)
+botao_ce.grid(row=1, column=1, padx=5, pady=5) #Por enquando esta com a mesma função do C
+botao_virgula.grid(row=6, column=2, padx=5, pady=5)
+botao_maismenos.grid(row=6, column=0, padx=5, pady=5)
 
 janela.mainloop()
 
