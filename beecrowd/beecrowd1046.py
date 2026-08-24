@@ -7,6 +7,4 @@ elif f > c:
 elif c == f:
     duracao = 24
 
-    
-
 print(f'O JOGO DUROU {duracao} HORA(S)')
